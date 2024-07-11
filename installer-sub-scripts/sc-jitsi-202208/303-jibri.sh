@@ -52,6 +52,11 @@ prosodyctl unregister recorder recorder.$JITSI_FQDN || true
 prosodyctl register recorder recorder.$JITSI_FQDN $PASSWD2
 
 mkdir -p /root/meta
+echo '$JVB_SHARD_PASSWD' >/root/meta/jvb-shard-passwd
+chmod 600 /root/meta/jvb-shard-passwd
+VERSION=\$(apt-cache policy jitsi-videobridge2 | grep Installed | rev | \
+    cut -d' ' -f1 | rev)
+echo \$VERSION > /root/meta/jvb-version
 echo $JITSI_FQDN > /root/meta/jitsi-fqdn
 echo $PASSWD1 > /root/meta/jibri-passwd
 echo $PASSWD2 > /root/meta/recorder-passwd
