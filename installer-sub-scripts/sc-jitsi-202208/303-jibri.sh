@@ -39,6 +39,10 @@ EOS
 PASSWD1=$(openssl rand -hex 20)
 PASSWD2=$(openssl rand -hex 20)
 
+JVB_SHARD_PASSWD=$(egrep '^org.jitsi.videobridge.xmpp.user.shard.PASSWORD=' \
+    $JITSI_ROOTFS/etc/jitsi/videobridge/sip-communicator.properties | \
+    cut -d '=' -f2)
+    
 lxc-attach -n eb-jitsi -- zsh <<EOS
 set -e
 prosodyctl unregister jibri auth.$JITSI_FQDN || true
